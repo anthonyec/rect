@@ -1,0 +1,27 @@
+{
+  "name": "frames",
+  "version": "1.0.0",
+  "description": "Non-visual visual layout engine",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel ./index.html",
+    "format": "prettier --loglevel warn --write '**/*.{ts,js,json,md}'",
+    "test": "mocha -r ts-node/register test/**/*.spec.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.13.8",
+    "@babel/plugin-transform-runtime": "^7.13.9",
+    "@babel/preset-env": "^7.13.9",
+    "@babel/preset-typescript": "^7.13.0",
+    "@babel/register": "^7.13.8",
+    "@types/assert": "^1.5.4",
+    "@types/mocha": "^8.2.1",
+    "mocha": "^8.3.0",
+    "parcel": "^2.0.0-beta.1",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.3"
+  }
+}
