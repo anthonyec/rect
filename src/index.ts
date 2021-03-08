@@ -10,6 +10,10 @@ interface Frame {
 //   y: number;
 // }
 
+function clamp(num: number, min: number, max: number) {
+  return Math.max(min, Math.min(num, max));
+}
+
 /** Create a representation of a frame. */
 export function createFrame(
   x: number,
@@ -40,34 +44,35 @@ export function divideHorizontally(
 
     return [frameA, frameB];
   } else {
-    const divisionCount = divisions.length + 1;
-
-    let frames = [];
-    let lastWidth = 0;
+    const legalDivisions = divisions.sort().map(num => clamp(num, 0, 1));
+    let divisionWidths: number[] = [];
     let lastDivision = 0;
 
-    for (let index = 0; index < divisionCount; index ++) {
-      const isLastDivision = index === divisions.length;
+    for (let index = 0; index < legalDivisions.length; index ++) {
+      const division = legalDivisions[index];
+      const divisionWidth = (division - lastDivision) * frame.width;
 
-      if (!isLastDivision) {
-        const division = divisions[index] - lastDivision;
-        const width = frame.width * division;
-        const x = frame.x + lastWidth;
-
-        lastWidth += width;
-        lastDivision = division;
-
-        frames.push(
-          createFrame(x, frame.y, width, frame.height)
-        );
-      } else {
-        frames.push(
-          createFrame(lastWidth, frame.y, frame.width - lastWidth, frame.height)
-        );
-      }
+      divisionWidths.push(divisionWidth);
+      lastDivision = division;
     }
 
-    return frames;
+    const extraDivisionWidth = (1 - lastDivision) * frame.width;
+    divisionWidths.push(extraDivisionWidth);
+
+
+    return divisionWidths.map((width, index) => {
+      // TODO: this is ugly, can I do it in 1 loop??
+      const lastWidth = index === 0 ? 0 : (frame.width * legalDivisions[index - 1]);
+
+      const newFrame = createFrame(
+        frame.x + lastWidth,
+        frame.y,
+        width,
+        frame.height
+      );
+
+      return newFrame;
+    });
   }
 }
 
