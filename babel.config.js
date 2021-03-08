@@ -1,4 +1,4 @@
-const { declare } = require('@babel/helper-plugin-utils');
+const { declare } = require("@babel/helper-plugin-utils");
 
 module.exports = declare((api) => {
   api.assertVersion(7);
@@ -8,20 +8,20 @@ module.exports = declare((api) => {
   return {
     presets: [
       [
-        '@babel/env',
+        "@babel/env",
         {
-          modules: 'commonjs'
-        }
+          modules: "commonjs",
+        },
       ],
-      '@babel/typescript'
+      "@babel/typescript",
     ],
     plugins: [
       [
-        '@babel/plugin-transform-runtime',
+        "@babel/plugin-transform-runtime",
         {
-          useESModules: true
-        }
-      ]
-    ]
+          useESModules: true,
+        },
+      ],
+    ],
   };
 });

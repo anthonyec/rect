@@ -22,8 +22,11 @@ export function createFrame(
   height: number = 0
 ): Frame {
   return {
-    x, y, width, height
-  }
+    x,
+    y,
+    width,
+    height,
+  };
 }
 
 /** Divide a frame into multiple frames */
@@ -44,11 +47,11 @@ export function divideHorizontally(
 
     return [frameA, frameB];
   } else {
-    const legalDivisions = divisions.sort().map(num => clamp(num, 0, 1));
+    const legalDivisions = divisions.sort().map((num) => clamp(num, 0, 1));
     let divisionWidths: number[] = [];
     let lastDivision = 0;
 
-    for (let index = 0; index < legalDivisions.length; index ++) {
+    for (let index = 0; index < legalDivisions.length; index++) {
       const division = legalDivisions[index];
       const divisionWidth = (division - lastDivision) * frame.width;
 
@@ -59,10 +62,10 @@ export function divideHorizontally(
     const extraDivisionWidth = (1 - lastDivision) * frame.width;
     divisionWidths.push(extraDivisionWidth);
 
-
     return divisionWidths.map((width, index) => {
       // TODO: this is ugly, can I do it in 1 loop??
-      const lastWidth = index === 0 ? 0 : (frame.width * legalDivisions[index - 1]);
+      const lastWidth =
+        index === 0 ? 0 : frame.width * legalDivisions[index - 1];
 
       const newFrame = createFrame(
         frame.x + lastWidth,
@@ -106,10 +109,8 @@ export function divideHorizontally(
 
 // // }
 
-
 // // divideHorizontally(myFrame, 0.5, 0.3, 0.2);
 // // // const myFrame = frame(0, 0, 100, 100) |> inset(10) |> divideHorizontally();
-
 
 // // // function divideHorizontally(frame: Frame, ...percentDivisions: number[]) {
 

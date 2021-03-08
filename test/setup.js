@@ -1,5 +1,5 @@
-require('@babel/register')({
+require("@babel/register")({
   ignore: [/node_modules\/.*/],
-  extensions: ['.js', '.jsx', '.ts', '.tsx'],
-  cache: false
+  extensions: [".js", ".jsx", ".ts", ".tsx"],
+  cache: false,
 });
