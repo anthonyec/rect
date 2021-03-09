@@ -2,7 +2,7 @@ import testInOut from "../testInOut";
 
 import { createFrame, getCenterPoint } from "../../src";
 
-const inputOutputTests = [
+testInOut(getCenterPoint, [
   {
     description: "gets center point 1",
     in: [createFrame(0, 0, 500, 300)],
@@ -43,6 +43,4 @@ const inputOutputTests = [
       y: 350
     }
   },
-];
-
-testInOut(getCenterPoint, inputOutputTests);
+]);

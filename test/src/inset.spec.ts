@@ -2,7 +2,7 @@ import testInOut from "../testInOut";
 
 import { createFrame, inset } from "../../src";
 
-const inputOutputTests = [
+testInOut(inset, [
   {
     description: "correctly returns inset frame 1",
     in: [createFrame(0, 0, 500, 300), 10],
@@ -48,6 +48,4 @@ const inputOutputTests = [
       height: 2.956,
     },
   },
-];
-
-testInOut(inset, inputOutputTests);
+]);

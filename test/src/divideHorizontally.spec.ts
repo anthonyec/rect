@@ -2,7 +2,7 @@ import testInOut from "../testInOut";
 
 import { createFrame, divideHorizontally } from "../../src";
 
-const inputOutputTests = [
+testInOut(divideHorizontally, [
   {
     description: "splits in half when no divisions provided",
     in: [createFrame(0, 0, 500, 300)],
@@ -224,6 +224,4 @@ const inputOutputTests = [
       { x: 150, y: 0, width: 150, height: 200 },
     ],
   },
-];
-
-testInOut(divideHorizontally, inputOutputTests);
+]);
