@@ -2,7 +2,7 @@ import {
   center,
   createFrame,
   sliceX,
-  getCenterPoint,
+  getCenter,
   inset,
   intersect,
 } from "./index";
@@ -70,7 +70,7 @@ function layout({ x, y }: { x: number; y: number }) {
   const splitFrames = sliceX(mainFrame, 1 / 4, 3 / 4);
   const insetFrames = splitFrames.map((frame) => inset(frame, 25));
   const mainFrameInset = inset(mainFrame, -25);
-  const centerOfSplitFrames = splitFrames.map((frame) => getCenterPoint(frame));
+  const centerOfSplitFrames = splitFrames.map((frame) => getCenter(frame));
   const frameCenteredInFirstSplit = center(
     createFrame(0, 0, 30, 60),
     splitFrames[0]

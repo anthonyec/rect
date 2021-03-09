@@ -1,7 +1,7 @@
 {
   "name": "frames",
   "version": "1.0.0",
-  "description": "Non-visual visual layout engine",
+  "description": "Functional frame layout utilities",
   "main": "index.js",
   "scripts": {
     "start": "parcel ./src/index.html",
