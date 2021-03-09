@@ -98,6 +98,22 @@ export function getCenter(frame: Frame): Point {
   return createPoint(frame.x + frame.width / 2, frame.y + frame.height / 2);
 }
 
+// function getTopLeftCorner(frame: Frame): Point {
+
+// }
+
+// function getTopRightCorner(frame: Frame): Point {
+
+// }
+
+// function getBottomLeftCorner(frame: Frame): Point {
+
+// }
+
+// function getBottomRightCorner(frame: Frame): Point {
+
+// }
+
 export function center(targetFrame: Frame, parentFrame: Frame): Frame {
   const centerPoint = getCenter(parentFrame);
 
@@ -137,34 +153,22 @@ export function intersect(frameA: Frame, frameB: Frame): Frame {
   return createFrame(x, y, width, height);
 }
 
-// export function scale(frame: Frame, scaleX: number, scaleY: number = 1): Frame {
-//   return frame;
-// }
+function resize(frame: Frame, width: number, height: number, pivot: Point): Frame {
+  return frame;
+}
 
-// // function distributeHorizontally(frames: Frame[], width: number, allowUnevenDistribution?: boolean): Frame[] {
-// // }
+function scale(frame: Frame, x: number, y: number, pivot: Point): Frame {
+  return frame;
+}
 
-// // function parent(targetFrame: Frame[], parentFrame: Frame[]): Frame {
+function distributeX(frames: Frame[], width: number): Frame[] {
+  return frames;
+}
 
-// // }
+function distributeY(frames: Frame[], width: number): Frame[] {
+  return frames;
+}
 
-// // function pivot(frame: Frame, pivotX: number, pivotY: number): Frame {
-
-// // }
-
-// // divideHorizontally(myFrame, 0.5, 0.3, 0.2);
-// // // const myFrame = frame(0, 0, 100, 100) |> inset(10) |> divideHorizontally();
-
-// // // function divideHorizontally(frame: Frame, ...percentDivisions: number[]) {
-
-// // // }
-
-// // // const myCoolFrame = frame(10, 10, 100, 100);
-// // // const frames = divideHorizontally(myCoolFrame, 0.3, 0.7, 0.9);
-
-// // // const insetFrames = frames.map(frame => inset(frame, 5));
-
-// // // const centerOfMyCoolFrame = center(myCoolFrame)
-// // // const pivotPointOfMyCoolFrame = pivotPoint(myCoolFrame, 0.5, 0.5)
-
-// // // parent(frame1, frame2)
+function parent(targetFrame: Frame, parentFrame: Frame): Frame {
+  return targetFrame;
+}
