@@ -35,7 +35,7 @@ function clamp(num: number, min: number, max: number) {
 }
 
 /** Divide a frame into multiple frames */
-export function divideHorizontally(
+export function sliceX(
   frame: Frame,
   ...divisions: number[]
 ): Frame[] {
@@ -94,12 +94,12 @@ export function inset(frame: Frame, size: number): Frame {
   );
 }
 
-export function getCenterPoint(frame: Frame): Point {
+export function getCenter(frame: Frame): Point {
   return createPoint(frame.x + frame.width / 2, frame.y + frame.height / 2);
 }
 
 export function center(targetFrame: Frame, parentFrame: Frame): Frame {
-  const centerPoint = getCenterPoint(parentFrame);
+  const centerPoint = getCenter(parentFrame);
 
   return createFrame(
     centerPoint.x - targetFrame.width / 2,

@@ -1,7 +1,7 @@
 import {
   center,
   createFrame,
-  divideHorizontally,
+  sliceX,
   getCenterPoint,
   inset,
   intersect,
@@ -67,7 +67,7 @@ scaleCanvas(canvas, context, 800, 600);
 
 function layout({ x, y }: { x: number; y: number }) {
   const mainFrame = createFrame(50, 50, 680, 230);
-  const splitFrames = divideHorizontally(mainFrame, 1 / 4, 3 / 4);
+  const splitFrames = sliceX(mainFrame, 1 / 4, 3 / 4);
   const insetFrames = splitFrames.map((frame) => inset(frame, 25));
   const mainFrameInset = inset(mainFrame, -25);
   const centerOfSplitFrames = splitFrames.map((frame) => getCenterPoint(frame));

@@ -1,8 +1,8 @@
 import testInOut from "../testInOut";
 
-import { createFrame, getCenterPoint } from "../../src";
+import { createFrame, getCenter } from "../../src";
 
-testInOut(getCenterPoint, [
+testInOut(getCenter, [
   {
     description: "gets center point 1",
     in: [createFrame(0, 0, 500, 300)],

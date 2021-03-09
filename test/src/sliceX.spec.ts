@@ -1,8 +1,8 @@
 import testInOut from "../testInOut";
 
-import { createFrame, divideHorizontally } from "../../src";
+import { createFrame, sliceX } from "../../src";
 
-testInOut(divideHorizontally, [
+testInOut(sliceX, [
   {
     description: "splits in half when no divisions provided",
     in: [createFrame(0, 0, 500, 300)],
