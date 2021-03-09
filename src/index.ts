@@ -101,8 +101,15 @@ export function getCenterPoint(frame: Frame): Point {
   );
 }
 
-export function center(frameA: Frame, frameB: Frame): Frame {
-  return frameA;
+export function center(targetFrame: Frame, parentFrame: Frame): Frame {
+  const centerPoint = getCenterPoint(parentFrame);
+
+  return createFrame(
+    centerPoint.x - (targetFrame.width / 2),
+    centerPoint.y - (targetFrame.height / 2),
+    targetFrame.width,
+    targetFrame.height
+  );
 }
 
 export function clip(frameA: Frame, frameB: Frame): Frame {

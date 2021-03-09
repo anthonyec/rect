@@ -1,4 +1,4 @@
-import { createFrame, divideHorizontally, getCenterPoint, inset } from "./index";
+import { center, createFrame, divideHorizontally, getCenterPoint, inset } from "./index";
 
 const canvas = document.querySelector("canvas");
 const context = canvas.getContext("2d");
@@ -10,17 +10,20 @@ function layout() {
   const mainFrameInset = inset(mainFrame, -25);
   const centerOfSplitFrames = splitFrames.map((frame) => getCenterPoint(frame));
 
+  const frameCenteredInFirstSplit = center(createFrame(0, 0, 30, 60), splitFrames[0]);
+
   return {
     mainFrame,
     splitFrames,
     insetFrames,
     mainFrameInset,
-    centerOfSplitFrames
+    centerOfSplitFrames,
+    frameCenteredInFirstSplit
   };
 }
 
 function draw() {
-  const { mainFrame, splitFrames, insetFrames, mainFrameInset, centerOfSplitFrames } = layout();
+  const { mainFrame, splitFrames, insetFrames, mainFrameInset, centerOfSplitFrames, frameCenteredInFirstSplit } = layout();
 
   context.beginPath();
   context.rect(mainFrame.x, mainFrame.y, mainFrame.width, mainFrame.height);
@@ -29,6 +32,11 @@ function draw() {
   context.strokeStyle = "green";
   context.beginPath();
   context.rect(mainFrameInset.x, mainFrameInset.y, mainFrameInset.width, mainFrameInset.height);
+  context.stroke();
+
+  context.strokeStyle = "yellow";
+  context.beginPath();
+  context.rect(frameCenteredInFirstSplit.x, frameCenteredInFirstSplit.y, frameCenteredInFirstSplit.width, frameCenteredInFirstSplit.height);
   context.stroke();
 
   splitFrames.forEach((splitFrame) => {
