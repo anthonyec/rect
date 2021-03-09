@@ -1,15 +1,15 @@
 import assert from "assert";
 
-interface Test<In, Out> {
+interface Test<Input, Output> {
   description: string;
-  in: In;
-  out: Out;
+  in: Input;
+  out: Output;
 }
 
 // TODO: Remove any
-export default function testInOut<In, Out>(
+export default function testInOut<Input, Output>(
   testSubject: any,
-  tests: Test<In, Out>[]
+  tests: Test<Input, Output>[]
 ) {
   describe(testSubject.name, () => {
     tests.forEach((test) => {
