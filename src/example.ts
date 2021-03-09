@@ -61,7 +61,6 @@ function layout({ x, y }: { x: number, y: number }) {
   const mainFrameInset = inset(mainFrame, -25);
   const centerOfSplitFrames = splitFrames.map((frame) => getCenterPoint(frame));
   const frameCenteredInFirstSplit = center(createFrame(0, 0, 30, 60), splitFrames[0]);
-
   const intersection = intersect(createFrame(x - 50, y - 50, 100, 100), splitFrames[1]);
 
   return {
