@@ -12,5 +12,5 @@ testInOut(center, [
     description: "centers bigger frame inside smaller frame",
     in: [createFrame(0, 0, 800, 600), createFrame(0, 0, 300, 400)],
     out: { x: -250, y: -100, width: 800, height: 600 },
-  }
+  },
 ]);

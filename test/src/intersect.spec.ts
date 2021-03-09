@@ -17,5 +17,5 @@ testInOut(intersect, [
     description: "handles no intersection",
     in: [createFrame(0, 0, 50, 50), createFrame(100, 100, 50, 50)],
     out: null,
-  }
+  },
 ]);

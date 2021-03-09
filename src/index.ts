@@ -12,7 +12,7 @@ interface Frame {
 
 /** Create a representation of a point */
 export function createPoint(x: number, y: number): Point {
-  return { x, y }
+  return { x, y };
 }
 
 /** Create a representation of a frame */
@@ -95,18 +95,15 @@ export function inset(frame: Frame, size: number): Frame {
 }
 
 export function getCenterPoint(frame: Frame): Point {
-  return createPoint(
-    frame.x + (frame.width / 2),
-    frame.y + (frame.height / 2)
-  );
+  return createPoint(frame.x + frame.width / 2, frame.y + frame.height / 2);
 }
 
 export function center(targetFrame: Frame, parentFrame: Frame): Frame {
   const centerPoint = getCenterPoint(parentFrame);
 
   return createFrame(
-    centerPoint.x - (targetFrame.width / 2),
-    centerPoint.y - (targetFrame.height / 2),
+    centerPoint.x - targetFrame.width / 2,
+    centerPoint.y - targetFrame.height / 2,
     targetFrame.width,
     targetFrame.height
   );
@@ -137,12 +134,7 @@ export function intersect(frameA: Frame, frameB: Frame): Frame {
     return null;
   }
 
-  return createFrame(
-    x,
-    y,
-    width,
-    height
-  );
+  return createFrame(x, y, width, height);
 }
 
 // export function scale(frame: Frame, scaleX: number, scaleY: number = 1): Frame {
