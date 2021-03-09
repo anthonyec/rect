@@ -1,3 +1,8 @@
+interface Point {
+  x: number;
+  y: number;
+}
+
 interface Frame {
   x: number;
   y: number;
@@ -5,16 +10,12 @@ interface Frame {
   height: number;
 }
 
-// interface Point {
-//   x: number;
-//   y: number;
-// }
-
-function clamp(num: number, min: number, max: number) {
-  return Math.max(min, Math.min(num, max));
+/** Create a representation of a point */
+export function createPoint(x: number, y: number): Point {
+  return { x, y }
 }
 
-/** Create a representation of a frame. */
+/** Create a representation of a frame */
 export function createFrame(
   x: number,
   y: number,
@@ -27,6 +28,10 @@ export function createFrame(
     width,
     height,
   };
+}
+
+function clamp(num: number, min: number, max: number) {
+  return Math.max(min, Math.min(num, max));
 }
 
 /** Divide a frame into multiple frames */
@@ -79,7 +84,7 @@ export function divideHorizontally(
   }
 }
 
-/** Create a frame inside a frame padded by a set size. */
+/** Inset frame by a certain amount */
 export function inset(frame: Frame, size: number): Frame {
   return createFrame(
     frame.x + size,
@@ -89,6 +94,25 @@ export function inset(frame: Frame, size: number): Frame {
   );
 }
 
+export function getCenterPoint(frame: Frame): Point {
+  return createPoint(
+    frame.x + (frame.width / 2),
+    frame.y + (frame.height / 2)
+  );
+}
+
+export function center(frameA: Frame, frameB: Frame): Frame {
+  return frameA;
+}
+
+export function clip(frameA: Frame, frameB: Frame): Frame {
+  return frameA;
+}
+
+// export function scale(frame: Frame, scaleX: number, scaleY: number = 1): Frame {
+//   return frame;
+// }
+
 // // function distributeHorizontally(frames: Frame[], width: number, allowUnevenDistribution?: boolean): Frame[] {
 // // }
 
@@ -97,10 +121,6 @@ export function inset(frame: Frame, size: number): Frame {
 // // }
 
 // // function pivot(frame: Frame, pivotX: number, pivotY: number): Frame {
-
-// // }
-
-// // function scale(frame: Frame, scaleX: number, scaleY: number = 1): Frame {
 
 // // }
 
