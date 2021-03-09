@@ -1,20 +1,20 @@
-import { createFrame, divideHorizontally } from './index';
+import { createFrame, divideHorizontally, inset } from './index';
 
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
 
 function layout() {
-  const mainFrame = createFrame(50, 50, 600, 300);
-  const splitFrames = divideHorizontally(mainFrame, 0.3333, 0.6666);
+  const mainFrame = createFrame(50, 50, 680, 230);
+  const splitFrames = divideHorizontally(mainFrame, 1/4, 3/4);
+  const insetFrames = splitFrames.map(frame => inset(frame, 25));
 
   return {
-    mainFrame, splitFrames
+    mainFrame, splitFrames, insetFrames
   }
 }
 
 function draw() {
-  const { mainFrame, splitFrames } = layout();
-
+  const { mainFrame, splitFrames, insetFrames } = layout();
 
   context.beginPath();
   context.rect(mainFrame.x, mainFrame.y, mainFrame.width, mainFrame.height);
@@ -27,6 +27,12 @@ function draw() {
     context.stroke();
   });
 
+  insetFrames.forEach((insetFrame) => {
+    context.strokeStyle = 'blue';
+    context.beginPath();
+    context.rect(insetFrame.x, insetFrame.y, insetFrame.width, insetFrame.height);
+    context.stroke();
+  });
 }
 
 draw();

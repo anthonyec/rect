@@ -79,20 +79,15 @@ export function divideHorizontally(
   }
 }
 
-// const mainFrame = createFrame(0, 0, 500, 100);
-// const splitFrames = divideHorizontally(mainFrame, 0.3, 0.7);
-// const splitFrames2 = divideHorizontally(mainFrame, 0.5);
-// const splitFrames3 = divideHorizontally(mainFrame);
-
-// console.log(mainFrame);
-// console.log(splitFrames);
-// console.log(splitFrames2);
-// console.log(splitFrames3);
-
-// // /** Create a frame inside a frame padded by a set size. */
-// // function inset(frame: Frame, size: number): Frame {
-
-// // }
+/** Create a frame inside a frame padded by a set size. */
+export function inset(frame: Frame, size: number): Frame {
+  return createFrame(
+    frame.x + size,
+    frame.y + size,
+    frame.width - (size * 2),
+    frame.height - (size * 2)
+  );
+}
 
 // // function distributeHorizontally(frames: Frame[], width: number, allowUnevenDistribution?: boolean): Frame[] {
 // // }
