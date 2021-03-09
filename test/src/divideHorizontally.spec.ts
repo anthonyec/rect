@@ -1,4 +1,4 @@
-import assert from "assert";
+import testInOut from "../testInOut";
 
 import { createFrame, divideHorizontally } from "../../src";
 
@@ -226,25 +226,4 @@ const inputOutputTests = [
   },
 ];
 
-describe("divideHorizontally", () => {
-  inputOutputTests.forEach((test) => {
-    it(`${test.description}`, () => {
-      // @ts-ignore
-      const frames = divideHorizontally(...test.in);
-
-      assert.strictEqual(frames.length, test.out.length);
-
-      try {
-        assert.deepStrictEqual(frames, test.out);
-      } catch (err) {
-        assert.fail(
-          `Actual output did not match expected output\nExpected:\n${JSON.stringify(
-            test.out,
-            null,
-            2
-          )}\n\nActual:\n${JSON.stringify(frames, null, 2)}`
-        );
-      }
-    });
-  });
-});
+testInOut("divideHorizontally", divideHorizontally, inputOutputTests);

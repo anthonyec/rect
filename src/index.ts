@@ -84,8 +84,8 @@ export function inset(frame: Frame, size: number): Frame {
   return createFrame(
     frame.x + size,
     frame.y + size,
-    frame.width - (size * 2),
-    frame.height - (size * 2)
+    frame.width - size * 2,
+    frame.height - size * 2
   );
 }
 
