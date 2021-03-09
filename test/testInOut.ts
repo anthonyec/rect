@@ -8,11 +8,10 @@ interface Test<In, Out> {
 
 // TODO: Remove any
 export default function testInOut<In, Out>(
-  name: string,
   testSubject: any,
   tests: Test<In, Out>[]
 ) {
-  describe(name, () => {
+  describe(testSubject.name, () => {
     tests.forEach((test) => {
       it(`${test.description}`, () => {
         // TODO: Remove this

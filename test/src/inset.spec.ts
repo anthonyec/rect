@@ -50,4 +50,4 @@ const inputOutputTests = [
   },
 ];
 
-testInOut("inset", inset, inputOutputTests);
+testInOut(inset, inputOutputTests);

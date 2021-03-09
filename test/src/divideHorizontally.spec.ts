@@ -226,4 +226,4 @@ const inputOutputTests = [
   },
 ];
 
-testInOut("divideHorizontally", divideHorizontally, inputOutputTests);
+testInOut(divideHorizontally, inputOutputTests);

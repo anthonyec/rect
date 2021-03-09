@@ -45,4 +45,4 @@ const inputOutputTests = [
   },
 ];
 
-testInOut("getCenterPoint", getCenterPoint, inputOutputTests);
+testInOut(getCenterPoint, inputOutputTests);
