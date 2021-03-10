@@ -5,6 +5,7 @@ import {
   getCenter,
   inset,
   intersect,
+  translate
 } from "./index";
 
 const canvas = document.querySelector("canvas");
@@ -67,7 +68,7 @@ scaleCanvas(canvas, context, 800, 600);
 
 function layout({ x, y }: { x: number; y: number }) {
   const mainFrame = createFrame(50, 50, 680, 230);
-  const splitFrames = sliceX(mainFrame, 1 / 4, 3 / 4);
+  const splitFrames = sliceX(mainFrame, 1/3, 3/4);
   const insetFrames = splitFrames.map((frame) => inset(frame, 25));
   const mainFrameInset = inset(mainFrame, -25);
   const centerOfSplitFrames = splitFrames.map((frame) => getCenter(frame));
@@ -76,7 +77,7 @@ function layout({ x, y }: { x: number; y: number }) {
     splitFrames[0]
   );
   const intersection = intersect(
-    createFrame(x - 50, y - 50, 100, 100),
+    translate(createFrame(x, y, 100, 100), -0.5, -0.5),
     splitFrames[1]
   );
 

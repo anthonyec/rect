@@ -153,8 +153,25 @@ export function intersect(frameA: Frame, frameB: Frame): Frame {
   return createFrame(x, y, width, height);
 }
 
+function sliceY(
+  frame: Frame,
+  ...divisions: number[]
+): Frame[] {
+  return [frame];
+}
+
 function resize(frame: Frame, width: number, height: number, pivot: Point): Frame {
   return frame;
+}
+
+// TODO: Test this!
+export function translate(frame: Frame, x: number, y?: number): Frame {
+  return createFrame(
+    frame.x + (frame.width * x),
+    frame.y + (frame.height * y),
+    frame.width,
+    frame.height
+  );
 }
 
 function scale(frame: Frame, x: number, y: number, pivot: Point): Frame {
@@ -171,4 +188,13 @@ function distributeY(frames: Frame[], width: number): Frame[] {
 
 function parent(targetFrame: Frame, parentFrame: Frame): Frame {
   return targetFrame;
+}
+
+function grid(frame: Frame, rows: number[], columns: number[]): Frame[] {
+  return [frame];
+}
+
+/** Create rectangle that encompasses two rectangles */
+function encompass(frameA: Frame, frameB: Frame): Frame {
+  return frameA;
 }
