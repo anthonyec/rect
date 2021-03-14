@@ -4,7 +4,7 @@
   "description": "Functional frame layout utilities",
   "main": "index.js",
   "scripts": {
-    "start": "parcel ./src/index.html",
+    "start": "parcel ./example/index.html",
     "format": "prettier --loglevel warn --write '**/*.{ts,js,json,md}'",
     "test": "mocha -r ts-node/register test/**/*.spec.ts"
   },

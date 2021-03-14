@@ -8,8 +8,8 @@ import {
   translate,
   boundingBox,
   stackY
-} from "./index";
-import { Frame } from "./types";
+} from "../src/index";
+import { Frame } from "../src/types";
 
 const canvas = document.querySelector("canvas");
 const context = canvas.getContext("2d");

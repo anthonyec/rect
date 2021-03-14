@@ -10,5 +10,5 @@
     "esModuleInterop": true,
     "noUnusedLocals": false
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "example/example.ts"]
 }
