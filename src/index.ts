@@ -3,7 +3,7 @@ interface Point {
   y: number;
 }
 
-interface Frame {
+export interface Frame {
   x: number;
   y: number;
   width: number;
@@ -35,10 +35,7 @@ function clamp(num: number, min: number, max: number) {
 }
 
 /** Divide a frame into multiple frames */
-export function sliceX(
-  frame: Frame,
-  ...divisions: number[]
-): Frame[] {
+export function sliceX(frame: Frame, ...divisions: number[]): Frame[] {
   if (!divisions.length) {
     const width = frame.width / 2;
     const frameA = createFrame(frame.x, frame.y, width, frame.height);
@@ -114,6 +111,51 @@ export function getCenter(frame: Frame): Point {
 
 // }
 
+// TODO: Test
+export function stackX(frames: Frame[], spacing: number): Frame[] {
+  const firstFrame = frames[0];
+
+  let newFrames: Frame[] = [];
+  let totalWidth = 0;
+
+  for (let index = 0; index < frames.length; index++) {
+    const frame = frames[index];
+
+    newFrames.push(
+      createFrame(firstFrame.x + totalWidth, frame.y, frame.width, frame.height)
+    );
+
+    totalWidth += frame.width + spacing;
+  }
+
+  return newFrames;
+}
+
+// TODO: Test
+export function stackY(frames: Frame[], spacing: number): Frame[] {
+  const firstFrame = frames[0];
+
+  let newFrames: Frame[] = [];
+  let totalHeight = 0;
+
+  for (let index = 0; index < frames.length; index++) {
+    const frame = frames[index];
+
+    newFrames.push(
+      createFrame(
+        frame.x,
+        firstFrame.y + totalHeight,
+        frame.width,
+        frame.height
+      )
+    );
+
+    totalHeight += frame.height + spacing;
+  }
+
+  return newFrames;
+}
+
 export function center(targetFrame: Frame, parentFrame: Frame): Frame {
   const centerPoint = getCenter(parentFrame);
 
@@ -153,22 +195,40 @@ export function intersect(frameA: Frame, frameB: Frame): Frame {
   return createFrame(x, y, width, height);
 }
 
-function sliceY(
-  frame: Frame,
-  ...divisions: number[]
-): Frame[] {
+export function boundingBox(frames: Frame[]): Frame {
+  // TODO: Make with 1 loop?
+  const leftPositions = frames.map((frame) => frame.x);
+  const topPositions = frames.map((frame) => frame.y);
+  const rightPositions = frames.map((frame) => frame.x + frame.width);
+  const bottomPositions = frames.map((frame) => frame.y + frame.height);
+
+  const minX = Math.min(...leftPositions);
+  const maxX = Math.max(...rightPositions);
+
+  const minY = Math.min(...topPositions);
+  const maxY = Math.max(...bottomPositions);
+
+  return createFrame(minX, minY, maxX - minX, maxY - minY);
+}
+
+function sliceY(frame: Frame, ...divisions: number[]): Frame[] {
   return [frame];
 }
 
-function resize(frame: Frame, width: number, height: number, pivot: Point): Frame {
+function resize(
+  frame: Frame,
+  width: number,
+  height: number,
+  pivot: Point
+): Frame {
   return frame;
 }
 
 // TODO: Test this!
 export function translate(frame: Frame, x: number, y?: number): Frame {
   return createFrame(
-    frame.x + (frame.width * x),
-    frame.y + (frame.height * y),
+    frame.x + frame.width * x,
+    frame.y + frame.height * y,
     frame.width,
     frame.height
   );
