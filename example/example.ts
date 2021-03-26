@@ -7,7 +7,12 @@ import {
   intersect,
   translate,
   boundingBox,
-  stackY
+  stackY,
+  stackX,
+  alignCenterY,
+  parent,
+  alignCenterX,
+  scale,
 } from "../src/index";
 import { Frame } from "../src/types";
 
@@ -104,7 +109,7 @@ document.addEventListener("mousemove", (evt) => {
 });
 
 function layout2({ x, y }: { x: number; y: number }) {
-  const mainFrame = createFrame(100, 100, 800, 300);
+  const mainFrame = createFrame(0, 0, 1024, 768);
   const framesSliced = sliceX(mainFrame, 1 / 6, 2 / 6, 3 / 6, 4 / 6);
 
   const container = createFrame(100, 100, 400, 500);
@@ -114,15 +119,23 @@ function layout2({ x, y }: { x: number; y: number }) {
   //   center(createFrame(200, 50, 150, 200), container),
   // ], 20);
 
-  const frames = stackY(
-    [
-      createFrame(200, 90, 100, 100),
-      createFrame(250, 50, 200, 50),
-      createFrame(150, 60, 150, 100),
-      createFrame(180, 60, 150, 200),
-    ],
-    10
+  const stack = alignCenterY(
+    stackY(
+      [
+        createFrame(0, 0, 100, 100),
+        createFrame(0, 0, 200, 10),
+        createFrame(0, 0, 150, 100),
+        createFrame(0, 0, 50, 10),
+      ],
+      20
+    )
   );
+
+  let stackContainer = boundingBox(stack);
+  stackContainer.x = x
+  stackContainer.y = y
+  stackContainer = translate(stackContainer, -0.5, -0.5);
+  const stackParentedToContainer = parent(stack, stackContainer);
 
   const b1 = createFrame(90, 50, 100, 100);
   const b2 = createFrame(50, 60, 300, 300);
@@ -132,15 +145,60 @@ function layout2({ x, y }: { x: number; y: number }) {
   const bounds = boundingBox([b1, b2]);
 
   return {
+    stackContainer,
+    stackParentedToContainer,
+    mainFrame,
     f1,
     f2,
     bounds,
   };
 }
 
+function layoutLogo({ x, y }: { x: number; y: number }) {
+  const main = createFrame(0, 0, 1024, 768);
+  const blocks = alignCenterX(stackX([
+    createFrame(0, 0, 100, 100),
+    createFrame(0, 0, 100, 100),
+    createFrame(0, 0, 100, 100)
+  ], 20));
+  // const blocksContainer = boundingBox(blocks);
+
+  const scaledBlocks = scale(blocks, 1 + (x / canvas.width), 1);
+  const scaledBlocksBoundingBox = boundingBox(scaledBlocks);
+  const centeredBoundingBox = center(scaledBlocksBoundingBox, main);
+  const parentedBlocks = parent(scaledBlocks, centeredBoundingBox);
+
+  /*
+    <center to="main">
+      <boundingBox>
+        <scale>
+          <alignCenterX>
+            <stackX>
+              <frame />
+              <frame />
+              <frame />
+            <stackX>
+          </alignCenterX>
+        </scale>
+      </boundingBox>
+    </center>
+  */
+
+  const letter1 = center(createFrame(0, 0, 10, 10), parentedBlocks[0]);
+  const letter2 = center(createFrame(0, 0, 10, 10), parentedBlocks[1]);
+  const letter3 = center(createFrame(0, 0, 10, 10), parentedBlocks[2]);
+
+  return {
+    blocks: parentedBlocks,
+    letter1,
+    letter2,
+    letter3,
+  };
+}
+
 function draw() {
   const frames = Object.values(
-    layout2({
+    layoutLogo({
       x: mouseX,
       y: mouseY,
     })

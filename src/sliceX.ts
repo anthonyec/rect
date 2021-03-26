@@ -34,7 +34,8 @@ export default function sliceX(frame: Frame, ...divisions: number[]): Frame[] {
 
     return divisionWidths.map((width, index) => {
       // TODO: this is ugly, can I do it in 1 loop??
-      const lastWidth = index === 0 ? 0 : frame.width * legalDivisions[index - 1];
+      const lastWidth =
+        index === 0 ? 0 : frame.width * legalDivisions[index - 1];
 
       const newFrame = createFrame(
         frame.x + lastWidth,
